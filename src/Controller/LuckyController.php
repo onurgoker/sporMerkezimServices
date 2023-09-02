@@ -17,6 +17,10 @@ class LuckyController extends AbstractController
     {
         $number = random_int(0, 100);
 
-        return $this->json(['property'=>$number],200);
+        $cities = Cities::all();
+
+
+
+        return $this->json(['cities'=>$cities],200);
     }
 }
