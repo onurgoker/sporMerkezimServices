@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 
 class LuckyController extends AbstractController
 {
@@ -13,13 +14,10 @@ class LuckyController extends AbstractController
      * Summary of number
      * @return Symfony\Component\HttpFoundation\Response
      */
-    public function number(): Response
+    public function number(PersistenceManagerRegistry $doctrine): Response
     {
-        $number = random_int(0, 100);
-
-        $cities = Cities::all();
-
-
+        $em = $doctrine->getManager();
+        $cities = [];
 
         return $this->json(['cities'=>$cities],200);
     }
